@@ -31,13 +31,12 @@ class userProfileTestCase(APITestCase):
     # check to retrieve the profile details of the authenticated user
     def test_userprofile_detail_retrieve(self):
         response = self.client.get(reverse('profile', kwargs={'pk': 1}))
-        # print(response.data)
+        print(response.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     # populate the user profile that was automatically created using the signals
     def test_userprofile_profile(self):
-        profile_data = {'description': 'I am a very famous game character', 'location': 'nintendo world',
-                        'is_creator': 'true', }
+        profile_data = {'location': 'nintendo'}
         response = self.client.put(reverse('profile', kwargs={'pk': 1}), data=profile_data)
         print(response.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
