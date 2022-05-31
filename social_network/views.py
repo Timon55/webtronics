@@ -27,6 +27,7 @@ class PostViewSet(LikedMixin, viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (IsAuthenticatedOrReadOnly, )
+    http_method_names = ['get', 'post']
 
     def perform_create(self, serializer):
         user = self.request.user
