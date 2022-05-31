@@ -15,10 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework_swagger.views import get_swagger_view
 
+schema_view = get_swagger_view(title='Social Network API')
+# Чтобы работал swagger
+# https://stackoverflow.com/questions/57654243/how-to-fix-attributeerror-at-api-doc-autoschema-object-has-no-attribute-ge
+# https://stackoverflow.com/questions/55929472/django-templatesyntaxerror-staticfiles-is-not-a-registered-tag-library
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
-    path('', include('social_network.urls'))
+    path('api/', include('social_network.urls')),
+    path('__debug__/', include('debug_toolbar.urls')),
+    path('', schema_view)
+
 ]

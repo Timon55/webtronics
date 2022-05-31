@@ -26,7 +26,7 @@ class userProfileDetailView(RetrieveUpdateDestroyAPIView):
 class PostViewSet(LikedMixin, viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticatedOrReadOnly, )
 
     def perform_create(self, serializer):
         user = self.request.user
